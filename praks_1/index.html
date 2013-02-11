@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Programmeerimine Ruby on Rails raamistikus</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h2>Programmeerimine Ruby on Rails raamistikus</h2>
+
+          <h4><a href="http://ruby-kursus.github.com/">http://ruby-kursus.github.com/</a></h4>
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h2>Intro</h2>
+						<p>
+							Kes me oleme?
+						</p>
+					</section>
+					<section>
+						<h2>Mikk Romulus</h2>
+						<p>
+              2007-2010 Apprise, 2010-2012 Fraktal, 2012- Fortumo
+            </p>
+            <p>
+              <a href="skype:gandalfgrey">Skype: gandalfgrey</a>
+              <br>
+              <a href="http://twitter.com/mromulus">@mromulus</a>
+              <br>
+              <a href="http://github.com/mromulus">github.com/mromulus</a> (not much there)
+            </p>
+					</section>
+					<section>
+						<h2>Tanel Kosk</h2>
+            <p>
+              5+ aastat Rubyt, 3+ aastat Fortumos
+            </p>
+            <p>
+              <a href="skype:gandalfgrey">Skype: tanelkosk</a>
+              <br>
+              <a href="http://github.com/noonius">github.com/noonius</a>
+            </p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Kursus</h2>
+					<p>
+						16 praktikumi, arvestustöö ja kaks vahetööd.
+					</p>
+          <p class="fragment">
+            Praktikumides kohalkäimine ei ole kohustuslik.
+          </p>
+          <p class="fragment">
+            Arvestus moodustub tööde hinnetest jaotusega 25% vahetöödest ja 50% arvestustööst.
+          </p>
+          <p class="fragment">
+            Praktika koosneb lühikesest teoreetiline osast, millele järgneb iseseisev töö ja nõustamine.
+          </p>
+				</section>
+
+				<section>
+					<h2>Tööde esitamine</h2>
+					<p>
+            Töö tuleb esitada kursuse github organisatsiooni all iga tudengi poolt loodud reposse. Rakendus peab ka töötama "päris-elus", mille jaoks luuakse eraldi keskkond.
+          </p>
+          <p class="fragment">
+            Täpsemalt esimese ülesande jagamisel
+          </p>
+        </section>
+
+        <section>
+          <h2>Ruby</h2>
+
+          <p>
+            Ruby loodi Jaapanis Yukihiro Matsumoto (<strong>matz</strong>) poolt 1993. aastal eesmärgiga luua keel, mis on arendajale hea kasutada ning mis teeb programmeerimise mõnusaks ja meeldivaks. See filosoofia on mõjutanud igat keele valdkonda ja on ka Ruby kasutajaskonna jaoks oluline.
+          </p>
+
+          <p>
+            Hea näide sellest on süntaks, kus on rõhk pigem inimesel kui masinal. Seetõttu on Ruby lähtekood kohati ka loetav "tavainimestele" ning ka arendajatel on võimalik keerulisi protseduure lihtsalt kirjeldada.
+          </p>
+        </section>
+
+        <section>
+          <h2>Ajalugu</h2>
+
+          <ul>
+            <li>1996 - 1.0 release</li>
+            <li>2000 - esimene inglisekeelne Ruby raamat</li>
+            <li>2005 - Ruby on Rails esimene versioon</li>
+            <li>2007 - 1.9 release</li>
+            <li>2013 veebruar - 2.0 release</li>
+          </ul>
+
+          <p class="fragment">
+            Praeguseks on Ruby populaarsus küllaltki kõrgel tasemel. Githubis on praegu 13% kogu repodest Ruby keeles, keelte edetabelis teisel kohal, HackerNews küsitluses samuti teine koht.
+          </p>
+        </section>
+
+        <section>
+          <p>
+            <blockquote cite="http://en.wikipedia.org/wiki/Ruby_(programming_language)">
+              Ruby is a dynamic, reflective, general-purpose object-oriented programming language that combines syntax inspired by Perl with Smalltalk-like features
+            </blockquote>
+            <cite>Wikipedia</cite>
+          </p>
+          <p class="fragment">
+            What?
+          </p>
+        </section>
+
+        <section>
+          <h2>Objekt-orienteeritus</h2>
+          <p>
+            <strong>Kõik</strong> asjad on objektid, ka muudes keeltes tuntud "primitiivid" on samal tasemel muude objektidega.
+          </p>
+          <p>
+            Pärimine käib ainult ühelt klassilt, kuid on võimalik kasutada mooduleid, mis lisavad funktsionaalsust (<em>mixin</em>)
+          </p>
+        </section>
+
+        <section>
+          <h2>Dünaamilisus, reflektiivsus</h2>
+          <p>
+            Intepreteeritav keel — võimaldab <em>run-time</em> ajal muuta enam-vähem kõike. Kasutame ka dünaamilist tüüpimist ja <em>closure</em> konstruktsioone.
+          </p>
+            <pre>
+              <code>
+                # new mathematics!
+                class Fixnum
+                  alias_method :old_add, :+
+                  def +(other)
+                    self.old_add(other) * 2
+                  end
+                end
+              </code>
+            </pre>
+        </section>
+
+        <section>
+          <h2>Actually running it</h2>
+
+          <p>
+            Ajalooliselt on Ruby kasutamiseks olnud matzi enda poolt loodud C keeles kirjutatud intepretaator (MRI - matz ruby implementation). Kahjuks on seda vaevanud või vaevamas mitmed probleemid — aeglus, ainult ühe lõime kasutus ja kehvemapoolne <em>garbage collection</em>. Seoses sellega on loodud mitmeid alternatiive, mis neid vigu vähemalt või rohkemal määral parandavad.
+          </p>
+        </section>
+
+        <section>
+          <p>
+            MRI 1.9 võimaldab kasutada operatsioonisüsteemi lõimesi, kuid virtuaalmasin suudab korraga ainult ühte lõime tööd hoida. Edasiminekuid on ka mäluhalduses ning võeti kasutusele uus GC. Koos selle versiooniga valmis ka Ruby keele spetsifikatsioon, mis võimaldas implentatsioone paremini arendada ja testida. Enne seda oli Ruby keele spekk sisuliselt MRI lähtekood.
+          </p>
+
+          <p>
+            Sellel kursusel kasutame MRI versiooni 1.9.3
+          </p>
+        </section>
+
+        <section>
+          <h2>Alternatiivid MRI-le</h2>
+
+          <ul>
+            <li>JRuby - Ruby on Java</li>
+            <li>Rubinius - Ruby on Ruby</li>
+            <li>ja teised ... mruby, IronRuby, Macruby, Maglev, RubyMotion</li>
+          </ul>
+        </section>
+
+				<section>
+					<h1>Viimane slaid</h1>
+          <h2>Aeg küsimusteks</h2>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
