@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Programmeerimine Ruby on Rails raamistikus</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h2>Programmeerimine Ruby on Rails raamistikus</h2>
+
+          <h4><a href="http://ruby-kursus.github.com/">http://ruby-kursus.github.com/</a></h4>
+				</section>
+
+				<section>
+					<h2>Ruby keele tutvustus I osa</h2>
+					<p>
+            Jooksutamine - <em>irb</em> ja <em>ruby</em>
+					</p>
+				</section>
+
+        <section>
+          <h2>Leksika ja süntaks</h2>
+          <p>
+            Tere maailm
+
+            <pre>
+              <code>
+                puts("Hello world!")
+              </code>
+            </pre>
+          </p>
+        </section>
+
+        <section>
+          <h2>Leksika ja süntaks</h2>
+          <p>
+            Sulud pole kohustuslikud, juhul kui tehete järjekord on ühene
+          </p>
+          <p>
+            Semikoolon rea lõpus pole kohustuslik
+          </p>
+          <p>
+            Mitmerealised laused - <em>/</em>
+            <pre>
+              <code>
+                x = 10 \
+                  + 10
+              </code>
+            </pre>
+          </p>
+        </section>
+
+        <section>
+          <h2>Muutujad</h2>
+          <p>
+            Muutujate nimetuste skeem - a_long_variable
+          </p>
+        </section>
+
+        <section>
+          <h2>Muutujad</h2>
+          <p>
+            Tüüp ei ole fikseeritud, võimaldab ümbernimetamist
+          </p>
+        </section>
+
+        <section>
+          <h2>Konstandid</h2>
+          <p>
+            Käituvad nagu muutujad, nimi algab suure tähega
+          </p>
+          <p>
+            Muutmine on võimalik, kuid intepretaator annab hoiatuse
+          </p>
+        </section>
+
+        <section>
+          <h2>Sõned</h2>
+          <p>
+            Loomine ootuspäraselt lihtne:
+            <pre>
+              <code>
+                "esimene"
+                'teine'
+              </code>
+            </pre>
+          </p>
+        </section>
+
+        <section>
+          <h2>Sõned</h2>
+          <p>
+            Ülakomadega loomine ei tee lisatöötlust, jutumärkides toimuvad mõned muutused
+          </p>
+          <p>
+            <em>\n</em> asendatakse uue reaga jms. Ruby eripärana saab kasutada interpolatsiooni:
+          </p>
+          <p>
+            <pre>
+              <code>
+                x = 32
+                "x on #{x}"
+                => "x on 32"
+              </code>
+            </pre>
+          </p>
+        </section>
+
+        <section>
+          <h2>Sõned</h2>
+          <p>
+            Sõned ei ole muutumatud (käituvad pigem nagu C sõned kui Java omad)
+          </p>
+          <pre>
+            <code>
+              tere = "tere"
+              teine_tere = tere
+              tere[0] = "p"
+              teine_tere
+              => "pere"
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Arvud</h2>
+          <p>
+            Kolm tüüpi - Fixnum, Bignum, Float
+          </p>
+
+          <p>
+            Fixnum väiksemate arvude ja Bignum suuremate jaoks. Omavahel käsitsi teisendama ei pea.
+          </p>
+          <p>
+            Jagamine annab alati vastuseks täisarvu
+          </p>
+        </section>
+
+        <section>
+          <h2>Arvud</h2>
+          <p>
+            Tehted - tavaline aritmeetika, võimalik ka iseenda muutmine lühiväljenditega <strong>+=</strong>, <strong>-=</strong>, <strong>*=</strong> ja <strong>/=</strong>
+          </p>
+        </section>
+
+        <section>
+          <h2>(Kümnend-)Murdarvud</h2>
+          <p>
+            Loomine - <em>täisarv.to_f</em>, otse <em>8.0</em>
+          </p>
+          <p>
+            Tehted säilitavad ka murdosa - 8.0/3.0 => 2.6666666
+          </p>
+        </section>
+
+        <section>
+          <h2>Arvud</h2>
+          <p>
+            Kõik on objektid, kuna Ruby ei kasuta primitiive
+            <pre>
+              <code>
+                2.class
+                => Fixnum
+                -4.abs
+                => 4
+                3.even?
+                => true
+                5.7.round
+                => 6
+              </code>
+            </pre>
+          </p>
+        </section>
+
+        <section>
+          <h2>Objektid</h2>
+          <p>
+            Kõik objektid pärivad lõpuks klassilt Object
+          </p>
+          <p>
+            Erijuhtumid - <em>true</em>, <em>false</em>, <em>nil</em>
+          </p>
+          <p>
+            On <em>singleton</em> tüüpi instantsid klassidest <em>TrueClass</em>, <em>FalseClass</em> ja <em>NilClass</em>
+          </p>
+        </section>
+
+        <section>
+          <h2>Võrdlused ja loogika</h2>
+          <p>
+            Tavaline võrdlus käib operaatoriga <strong>==</strong>. Saadaval on ka üldtuntud operaatorid <strong>!=</strong>, <strong>></strong>, <strong><</strong>, <strong>>=</strong> ja <strong><=</strong>
+          </p>
+          <p>
+            Boole'i loogikaoperaatorid - <strong>&&</strong>, <strong>||</strong> ja <strong>!</strong>
+          </p>
+          <p>
+            Lisaks veel <strong>and</strong>, <strong>or</strong> ning <strong>not</strong>
+          </p>
+          <p>
+            Toimivad samamoodi, kuid erinevused tehete järjekorras. Kindla ja enamasti ootuspärase käitumisega on esimesed
+          </p>
+        </section>
+
+
+        <section>
+          <h2>Võrdlused ja loogika</h2>
+          <p>
+            Kõiki objekte saab võrdluses kasutada, käitumine kindla reegli järgi - kõik <em>false</em> ja <em>nil</em> väärtused on false, ülejäänud true
+          </p>
+          <pre>
+            <code>
+              "123" && true
+              => true
+              "123" and 123
+              => true
+              nil or false
+              => false
+            </code>
+          </pre>
+        </section>
+
+
+        <section>
+          <h2>Programmivoog</h2>
+          <p>
+            Otsustuspunktide loomine käib <strong>if</strong> lausega. Formaat on sarnane teistele keeltele, väikeste erinevustega - kasutusel on <strong>end</strong> bloki lõpetamiseks
+          </p>
+          <pre>
+            <code>
+              if 2 > 3
+                puts "Never going to happen"
+              elsif rand>0.5
+                # rand genereerib juhusliku arvu [0.0, 1.0)
+                puts "Might happen"
+              else
+                puts "Might also happen"
+              end
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Programmivoog</h2>
+
+          <p>
+            Eksisteerib ka vastandtehe <strong>unless</strong>
+          </p>
+
+          <p>
+            Mõlemat saab kasutada rea lõpus kontrollimaks ühe lause käivitamist
+          </p>
+
+          <pre>
+            <code>
+              arv = 10000
+              puts "Päris suur number" if arv > 200
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Tsüklid</h2>
+          <p>Peamised vahendid <em>while</em>, <em>for</em> on Rubys olemas</p>
+          <pre>
+            <code>
+              i = 0
+              while i <= 10
+                puts "i = #{i}"
+              end
+
+              stuff = ["first", "second", "third"]
+              for item in stuff
+                puts item
+              end
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Tsüklid</h2>
+          <p>Lisaks on olemas <em>until</em></p>
+          <pre>
+            <code>
+              i = 0
+              until i > 10
+                puts "i = #{i}"
+              end
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Tsüklid</h2>
+          <p>For enamasti ei kasutata, Ruby arendaja teeks eelneva näite pigem nii:</p>
+          <pre>
+            <code>
+              stuff = ["first", "second", "third"]
+              stuff.each do |item|
+                puts item
+              end
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Tsüklid</h2>
+          <p>Tsüklitest saab välja kasutades <em>break</em>, jätta praegune iteratsioon vahele kasutades <em>next</em></p>
+          <pre>
+            <code>
+              i = 0
+              until i > 10
+                next if i.even?
+                break if i == 8
+                puts "i = #{i}"
+              end
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Sümbolid</h2>
+          <p>
+            Ruby kasutab lisaks muudetavadele sõnedele ja muutmatuid sümboleid. Need defineeritakse sarnaselt sõnega, kuid kooloniga alguses
+          </p>
+          <pre>
+            <code>
+              status = :ok
+            </code>
+          </pre>
+          <p>
+            Kasutatakse sisemiselt olekute hoidmiseks, kus muutuv sõne võib tekitada vigu või kus pole vaja kasutajapoolset sisendit.
+          </p>
+        </section>
+
+
+        <section>
+          <h2>Massiivid ja räsitabelid</h2>
+          <p>
+            Massiivi defineerimiseks pole vaja teada suurust, defineeritakse nii:
+          </p>
+          <pre>
+            <code>
+              array = []
+              x = Array.new
+            </code>
+          </pre>
+          <p>
+            Suurust saab dünaamiliselt muuta, pikenemisel täidetakse tühjad kohad <em>nil</em> väärtustega. Esimene indeks on Ruby-s 0.
+          </p>
+          <pre>
+            <code>
+              x = []
+              x[4] = "banana"
+              x
+              => [nil, nil, nil, nil, "banana"]
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Massiivid ja räsitabelid</h2>
+          <p>
+            Räsitabel on järjestamata kogum võti-väärtus paaridest. Võtmetena kasutatakse tavaliselt sümboleid, räsitabel defineeritakse nii:
+          </p>
+          <pre>
+            <code>
+              hash = {}
+              x = Hash.new
+              y = { :key => "value" }
+
+              x[:fruit] = "banana"
+              x
+              => {:fruit => "banana"}
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Meetodid</h2>
+          <p>
+            Meetodite defineerimine käib lausega <em>def</em>. Kui ei ole täpsustatud, siis defineeritakse parajasti kasutuelolevasse skoopi.
+          </p>
+          <pre>
+            <code>
+              def say_hello(name)
+                puts "Hello #{name}"
+              end
+
+              say_hello "Mikk"
+              => "Hello Mikk"
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h1>Viimane slaid</h1>
+        </section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
