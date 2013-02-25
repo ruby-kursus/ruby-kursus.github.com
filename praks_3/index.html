@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Programmeerimine Ruby on Rails raamistikus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section>
+          <h2>Programmeerimine Ruby on Rails raamistikus</h2>
+
+          <h4><a href="http://ruby-kursus.github.com/">http://ruby-kursus.github.com/</a></h4>
+        </section>
+
+        <section>
+          <h2>Ruby keele tutvustus II osa</h2>
+          <p>
+            Ruby klassi süntax
+          </p>
+          <pre>
+            <code class="ruby">
+              class Something
+                public
+
+                def public_method
+                end
+
+                protected
+
+                def protected_method
+                end
+
+                private
+
+                def private_method
+                end
+              end
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>
+            Pärimine
+          </h2>
+          <pre>
+            <code class="ruby">
+              class Thing
+                def describe
+                  if alive?
+                    puts "Yay, I'm alive"
+                  else
+                    puts "Boo, being non-animate sucks"
+                  end
+                end
+
+                private
+
+                def alive?
+                  false
+                end
+              end
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <p>
+            Ka privaatsed meetodid päritakse
+          </p>
+          <pre>
+            <code class="ruby">
+              class Rock < Thing
+              end
+
+              stone = Rock.new
+              stone.describe #prints "Boo, being non-animate sucks"
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <p>
+            Loomisel kutsutakse välja <em>initialize</em> meetod
+          </p>
+          <pre>
+            <code class="ruby">
+              class Rock
+                def initialize; puts "a Rock created"; end
+              end
+
+              Rock.new # prints "a Rock created"
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <p>
+            Meetodite argumentidele saab anda vaike-väärtuse
+          </p>
+
+          <pre>
+            <code class="ruby">
+              def add_numbers(first, second = 1)
+                first + second
+              end
+
+              add_numbers 2
+              => 3
+              add_numbers 2, 5
+              => 7
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <p>
+            Instantsi muutujad algavad <em>@</em> sümboliga, klassi muutujad <em>@@</em> sümbolitega.
+            Klassi meetodite definitsioonid - <em>def self.nimi</em>
+          </p>
+          <pre>
+            <code class="ruby">
+              class Generator
+                @@count = 0
+
+                def self.create_a_rock
+                  @@count += 1
+                  puts "#{@@count} rocks and counting.."
+                  Rock.new
+                end
+              end
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <p>
+            Instantsi muutujate mugavam kasutamine käib läbi <em>attr_reader</em>, <em>attr_writer</em> ja <em>attr_accessor</em> meetodite
+          </p>
+          <pre>
+            <code class="ruby">
+              class Rock
+                attr_accessor :weight
+
+                def double_my_weight
+                  self.weight *= 2
+                end
+
+                def alternative_weight_getter
+                  @weight
+                end
+              end
+            </code>
+          </pre>
+          <p>Accessor loob nii omistamise kui väljastamise meetodid, reader ja writer vastavalt ainult ühe</p>
+
+        </section>
+
+        <section>
+          <p>
+            Meetodile saab anda kaasa suvaline arv argumente
+          </p>
+          <pre>
+            <code class="ruby">
+              class Book
+                def initialize(*pages)
+                  pages.each do |page|
+                    self.add_page page
+                  end
+                end
+
+                protected
+
+                def add_page(page)
+                  puts page
+                end
+              end
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <p>Moodulid komplekteerivad mingi funktsionaalsuse ühte kohta kokku. Instantsimeetodid lisatakse <em>include</em> lausega</p>
+
+          <pre>
+            <code class="ruby">
+              module EasyToHtml
+                def to_html
+                  "<h1>#{self.class}</h1><p>I am #{self.inspect}</p>"
+                end
+              end
+
+              class Book
+                include EasyToHtml
+              end
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <p>Klassimeetodid lisatakse <em>extend</em> lausega</p>
+          <pre>
+            <code class="ruby">
+              module Htmlable
+                def to_html
+                  "<p>I have some ancestors: #{ancestors * ", "}</p>"
+                end
+              end
+
+              class Thing
+                extend Htmlable
+              end
+            </code>
+          </pre>
+        </section>
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
