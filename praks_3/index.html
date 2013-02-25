@@ -63,7 +63,7 @@
 
         <section>
           <h2>
-            Pärimine
+            Pärimise näide, I
           </h2>
           <pre>
             <code class="ruby">
@@ -87,6 +87,9 @@
         </section>
 
         <section>
+          <h2>
+            Pärimise näide, II
+          </h2>
           <p>
             Ka privaatsed meetodid päritakse
           </p>
@@ -180,7 +183,7 @@
 
         <section>
           <p>
-            Meetodile saab anda kaasa suvaline arv argumente
+            Meetodile saab anda kaasa suvalise arvu argumente
           </p>
           <pre>
             <code class="ruby">
@@ -208,7 +211,7 @@
             <code class="ruby">
               module EasyToHtml
                 def to_html
-                  "<h1>#{self.class}</h1><p>I am #{self.inspect}</p>"
+                  "&lt;h1&gt;#{self.class}&lt;/h1&gt;&lt;p&gt;I am #{self.inspect}&lt;/p&gt;"
                 end
               end
 
@@ -225,7 +228,7 @@
             <code class="ruby">
               module Htmlable
                 def to_html
-                  "<p>I have some ancestors: #{ancestors * ", "}</p>"
+                  "&lt;p&gt;I have some ancestors: #{ancestors * ", "}&lt;/p&gt;"
                 end
               end
 
