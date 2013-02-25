@@ -186,7 +186,7 @@
                 => Fixnum
                 -4.abs
                 => 4
-                3.even?
+                3.odd?
                 => true
                 5.7.round
                 => 6
@@ -289,6 +289,7 @@
               i = 0
               while i <= 10
                 puts "i = #{i}"
+                i+=1
               end
 
               stuff = ["first", "second", "third"]
@@ -307,6 +308,7 @@
               i = 0
               until i > 10
                 puts "i = #{i}"
+                i+=1
               end
             </code>
           </pre>
@@ -335,6 +337,7 @@
                 next if i.even?
                 break if i == 8
                 puts "i = #{i}"
+                i+=1
               end
             </code>
           </pre>
