@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Programmeerimine Ruby on Rails raamistikus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section>
+          <h2>Programmeerimine Ruby on Rails raamistikus</h2>
+          <h4><a href="http://ruby-kursus.github.com/">http://ruby-kursus.github.com/</a></h4>
+        </section>
+
+        <section>
+          <h2>RubyGems</h2>
+          <ul>
+            <li>Rubys kirjutatud tarkvara levitatakse tavaliselt pakettidena, mida nimetatakse <i>Gem</i>'ideks.</li>
+            <li>Gem võib sisaldada kas tervet rakendust või teeki ainult mõne lisafunktsiooniga</li>
+            <li>Gem'id paiknevad ühes keskses repositooriumis: <a href="http://rubygems.org">http://rubygems.org</a></li>
+          </ul>
+        </section>
+        
+        <section>
+          <h2>Ruby Gemi'de kasutamine</h2>
+          <ul>
+            <li>Haldamiseks kasutatakse programmi <i>RubyGems</i> <br />(käsk <strong>gem</strong>)</li>
+            <pre><code>
+            $ gem --help
+            </code></pre>
+            <li>Alates versioonist 1.9 on RubyGems Ruby'ga kaasas</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Ruby Gemi'de kasutamine</h2>
+          <p>Gemi installeerimine ...</p>
+          <pre><code>
+          $ gem install nokogiri
+          Fetching: nokogiri-1.5.6.gem (100%)
+          Building native extensions.  This could take a while...
+          Successfully installed nokogiri-1.5.6
+          1 gem installed
+          </code></pre>
+        </section>
+        
+        <section>
+          <h2>Ruby Gemi'de kasutamine</h2>
+          <p>... ja koodis kasutamine</p>
+          <pre><code class="ruby">
+          require 'rubygems'
+          require 'nokogiri'
+          </code></pre>
+        </section>
+        
+        <section>
+          <h2>Kasulike Gem'ide leidmine</h2>
+          <ul>
+            <li><a href="http://rubygems.org">http://rubygems.org</a></li>
+            <li><a href="https://www.ruby-toolbox.com/">https://www.ruby-toolbox.com</a></li>
+          </ul>
+        </section>
+        
+        <section>
+          <h2>Ruby koodi testimine</h2>
+          <p>
+            Testimiseks on Ruby's kirjutatud üsna mitmeid raamistikke, näiteks Ruby Toolboxi kaudu leiab <a href="https://www.ruby-toolbox.com/categories/testing_frameworks">17 erinevat raamistikku.</a>
+          </p>
+          <p>
+            Enimkasutatud on neist siiski ainult kaks: <a href="http://docs.seattlerb.org/minitest">MiniTest</a> ja <a href="http://rspec.info">RSpec</a>. Kumba neist eelistada on täiesti "maitse küsimus".
+          </p>
+        </section>
+        
+        <section>
+          <h2>MiniTest</h2>
+          <ul>
+            <li>Ruby'iga kaasas, kuid kaasaegsema versiooi saamiseks tuleks ikkagi installeerida eraldi gem'ina</li>
+            <li>Toetab nii testide kirjutamist nii <i>Unit</i>'ite kui ka <i>Spec</i>'idena</li>
+            <li>Kergesti laiendatav ja seetõttu ka palju valmistehtud laiendusi</li>
+          </ul>
+        </section>
+        
+        <section>
+          <h2>MiniTest</h2>
+          <p>Unit testi faili struktuur</p>
+          <pre><code class="ruby">
+          require 'minitest/autorun'
+
+          class TestSomeModel < MiniTest::Unit::TestCase
+            def setup
+            end
+
+            def teardown
+            end
+
+            def test_some_functionality
+            end
+          end
+          </code></pre>
+        </section>
+        
+        <section>
+          <h2>MiniTest</h2>
+          <p><i>#setup</i> käivitatakse enne iga testi jooksutamist, siin on mõistlik näiteks väärtustada muutujad, mida on iga testi juures vaja</p>
+          <pre><code class="ruby">
+          def setup
+            @person = Person.new(
+              :full_name => 'Samuel Beckett',
+              :sex => 'male'
+            )
+          end
+          </code></pre>
+        </section>
+        
+        <section>
+          <h2>MiniTest</h2>
+          <p><i>#teardown</i> käivitatakse peale iga testi jooksutamist</p>
+          <pre><code class="ruby">
+          def teardown
+            # clean_up_database
+          end
+          </code></pre>
+        </section>
+        
+        <section>
+          <h2>MiniTest</h2>
+          <p>Kõik meetodid, mille nime algus on kujul 'test_' on eraldi testid ja käivitatakse 'minitest/autorun' kasutamisel automaatselt.</p>
+          <pre><code class="ruby">
+          def test_presence_of_first_name
+            assert_equal 'Samuel', @person.first_name
+          end
+          
+          def test_person_sex
+            refute @person.female?
+          end
+          </code></pre>
+        </section>
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
