@@ -87,8 +87,8 @@
           <h2>Rails</h2>
           <p>Hariliku päringu elutsükkel</p>
           <ol>
-            <li>Otsitakse vastav päringule controller routes.rb kaudu</li>
-            <li>Kontrolleri vastav action käivitatakse, tavaliselt sisaldab mõne mudeli leidmist/loomist/muutmist</li>
+            <li>Otsitakse vastav päringule controller ja ation routes.rb kaudu</li>
+            <li>Vastav action käivitatakse, tavaliselt sisaldab mõne mudeli leidmist/loomist/muutmist</li>
             <li>Actionile vastav view renderdatakse ning saadetakse vastusena</li>
           </ol>
         </section>
@@ -96,7 +96,7 @@
         <section>
           <h2>ActiveRecord</h2>
           <p>
-            Abstraktsioon andmebaasiga suhtluseks, koondab.
+            Abstraktsioon andmebaasiga suhtluseks, koondab vastava objekti funktsionaalsust, tihti kasutatakse lisamooduleid.
           </p>
           <pre><code class="ruby">
             class Deck < ActiveRecord::Base
