@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Programmeerimine Ruby on Rails raamistikus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section>
+          <h2>Programmeerimine Ruby on Rails raamistikus</h2>
+          <h4><a href="http://ruby-kursus.github.com/">http://ruby-kursus.github.com/</a></h4>
+        </section>
+
+        <section>
+          <h2>Bundler</h2>
+          <p>
+            Abivahend <em>gem</em>-ide haldamiseks ühe rakenduse skoobis. Hoolitseb selle eest, et oleks laetud õiged versioonid ja nende omavahelised sõltuvused oleks rahuldatud.
+          </p>
+          <p>
+            Konfiguratsioon on kahes failis — <strong>Gemfile</strong> ja <strong>Gemfile.lock</strong>, neist peaks muutma ainult esimest. Mõlemad peavad olema versioonihalduses, et kõikidel arendajatel on samasugune seis.
+          </p>
+          <pre><code>
+            gem install bundler
+          </code></pre>
+          <p>
+            Kasutamiseks on käsk <em>bundle install</em>, mis paigaldab vajalikud gemid.
+          </p>
+        </section>
+
+        <section>
+          <h2>Rails</h2>
+          <p>
+            Tuntuim raamistik veebirakendusteks Ruby keeles. Koosneb mitmetest alakomponentidest, paigaldamiseks kasutada:
+          </p>
+          <pre><code>
+            gem install rails
+            bundle install
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Rails</h2>
+          <p>Kasutamine - uue projekti loomine <em>rails new project_name</em></p>
+          <p>konsooli käivitamine - <em>rails c</em></p>
+          <p>serveri käivitamine - <em>rails s</em></p>
+          <p>Vaikimisi laetakse Rails arendus-režiimis, mis tähendab et muudatuste tegemisel ei pea serverit taaskäivitama. See tähendab, et asjad on veidi aeglasemad kui "päriselt". Production režiimis cachetakse kood ära ja korduvlaadimist ei toimu</p>
+        </section>
+
+        <section>
+          <h2>Rails</h2>
+          <p>
+            Rails põhineb MVC (Model-View-Controller) mustril
+          </p>
+          <p>
+            Model - andmemudel, tavaliselt kasutatakse ActiveRecord ORMi. Lihtsalt öeldes on see kiht andmebaasi vahel, Railsi maailmas kirjutatakse enamik äriloogikast just mudelitesse.
+          </p>
+          <p>
+            Controller - kood, mille ülesanne on sissetulevate päringute töötlemisega ja vastuste genereerimisega. Reeglina kasutatakse REST põhimõtet ja sellest tulenevaid actioneid
+          </p>
+          <p>
+            View - mustand, mille põhjal igale päringule koostatakse vastus, tavaliselt HTML, kuid võib ka olla mõnes muus formaadis.
+          </p>
+        </section>
+
+        <section>
+          <h2>Rails</h2>
+          <p>Hariliku päringu elutsükkel</p>
+          <ol>
+            <li>Otsitakse vastav päringule controller routes.rb kaudu</li>
+            <li>Kontrolleri vastav action käivitatakse, tavaliselt sisaldab mõne mudeli leidmist/loomist/muutmist</li>
+            <li>Actionile vastav view renderdatakse ning saadetakse vastusena</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>ActiveRecord</h2>
+          <p>
+            Abstraktsioon andmebaasiga suhtluseks, koondab.
+          </p>
+          <pre><code class="ruby">
+            class Deck < ActiveRecord::Base
+              # table name is implicilty items
+
+              has_many :cards # 1-to-n relationship
+
+              def pick_random_card
+                cards.sample
+              end
+            end
+
+            class Card < ActiveRecord::Base
+              belongs_to :deck #implicit foreign key deck_id
+            end
+          </code></pre>
+        </section>
+
+        <section>
+          <pre><code class="ruby">
+            d = Deck.create
+            c = Card.create(:suit => :spade, :rank => "jack")
+            d.cards << c
+
+            # creates the card-deck relation
+
+            # all fields in db are automatially mapped to methods
+            # i.e. if we have a boolean field called 'jokers'
+            d.jokers
+            => false
+
+            Card.where(:rank => "jack").first # leiab sama kaardi, mis on muutujas c
+          </code></pre>
+        </section>
+
+
+        <section>
+          <pre><code class="ruby">
+            class DecksController < ApplicationController
+              def index
+                @decks = Deck.all
+
+                respond_to { |format|
+                  format.json { render :json => @decks}
+                  format.all { render "index" }
+                }
+              end
+            end
+          </code></pre>
+        </section>
+
+        <section>
+          <p>Instantsimuutujad on automaatselt view-des nähtavad</p>
+          <pre><code class="ruby">
+            # app/views/decks/index.html.erb
+            &lt;ul&gt;
+              &lt;% @decks.each do |deck| %&gt;
+                &lt;li&gt;
+                  &lt;%= deck.info %&gt;
+                &lt;/li&gt;
+              &lt;% end %&gt;
+            &lt;/ul&gt;
+          </code></pre>
+        </section>
+
+        <section>
+          <p>Ei pea kasutama tavalisena kaasas olnud template lahendust, alternatiiv HAMLis:</p>
+          <pre><code class="ruby">
+            # app/views/decks/index.haml
+            %ul
+              - @decks.each do |deck|
+                %li= deck.info
+          </code></pre>
+          <p>Mõlemad näited genereerivad samasuguse HTMLi</p>
+        </section>
+
+        <section>
+          <p>Railsil on veel hulganisti komponente, mis on kasulikud ja/või lihtsustavad arendaja elu. Mainida võiks - ActionHelper, ActionMailer, asset pipeline, Observer jpm.</p>
+          <p>Lisaks on palju populaarseid geme, mis lisavad levinud funktsionaalsust - näiteks omniauth või devise autentimiseks; paperclip failide üleslaadimiseks, resque asünkroonseks töötluseks.</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
