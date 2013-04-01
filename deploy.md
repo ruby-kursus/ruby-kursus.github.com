@@ -10,7 +10,8 @@ Oma rakenduse laadimine production serverisse
 Oma masinas
 -------
 
-Gemfile'i tuleb lisada JS keskkond, selleks saab gemi 'therubyracer'
+Gemfile'i tuleb lisada JS keskkond -  selleks saab kasutada gemi 'therubyracer'
+ja Thin servier - "gem 'thin'"
 
 
 Serveris
@@ -70,7 +71,7 @@ Postgresql puhul on vaja lisada Gemfile sisse rida "gem 'pg"', mysql puhul "gem 
     
 #### 6. Käivita Ruby veebiserveri protsess
 
-    bundle exec thin start -p PORDI_NUMBER
+    bundle exec thin start -e production -p PORDI_NUMBER
     
 #### 7. Kontrolli, kas rakendus on veebibrauseriga kasutatav
 
