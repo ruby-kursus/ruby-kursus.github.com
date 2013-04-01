@@ -66,7 +66,7 @@ Postgresql puhul on vaja lisada Gemfile sisse rida "gem 'pg"', mysql puhul "gem 
     
 #### 5. Sisesta andmebaasi schema ja andmed migrtsioonide abil
     
-    bundle exec rails:db:migrate RAILS_ENV=production
+    bundle exec rake db:migrate RAILS_ENV=production
     
 #### 6. Käivita Ruby veebiserveri protsess
 
