@@ -65,4 +65,6 @@ Kui kasutad Postgresqli:
 
     bundle exec thin start -p PORDI_NUMBER
     
-#### 7. Kontrolli, kas rakendus on veebibrauseriga kasutatav ja ava http://SERVERI_IP_AADRESS:PORDI_NUMBER
+#### 7. Kontrolli, kas rakendus on veebibrauseriga kasutatav
+
+ava `http://SERVERI_IP_AADRESS:PORDI_NUMBER`
