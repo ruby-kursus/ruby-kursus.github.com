@@ -7,6 +7,11 @@ Oma rakenduse laadimine production serverisse
 
 3. Oma rails'i applikatsiooni serveris tööle logi serverisse sisse ja järgi järgmiseid juhiseid.
 
+Oma masinas
+-------
+
+Gemfile'i tuleb lisada JS keskkond, selleks saab gemi 'therubyracer'
+
 
 Serveris
 -------
@@ -52,6 +57,8 @@ Kui kasutad Postgresqli:
       pool: 5
       username: KASUTAJANIMI # toomas
       password: # selle leiad serverist oma kodukataloogis olevast failist 'mysql_pwd'
+      
+Postgresql puhul on vaja lisada Gemfile sisse rida "gem 'pg"', mysql puhul "gem 'mysql2'"
 
 #### 4. Loo andmebaas, kasutades `rake` taski
 
