@@ -1,7 +1,7 @@
 Oma rakenduse laadimine production serverisse
 =============
 
-1. Saada juhendajale oma SSH avalik võti. Tavaliselt on see fail `~/.ssh/id_rsa.pub` või `~/.ssh/id_dsa.pub`
+1. Saada juhendajale (tanel ätt fortumo.com) oma SSH avalik võti. Tavaliselt on see fail `~/.ssh/id_rsa.pub` või `~/.ssh/id_dsa.pub`
 
 2. Juhendaja saadab vastu serverisse sisselogimiseks vajalikud andmed.
 
