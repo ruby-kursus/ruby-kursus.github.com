@@ -55,7 +55,7 @@ Kui kasutad Postgresqli:
 
 #### 4. Loo andmebaas, kasutades `rake` taski
 
-    rake db:create
+    rake db:create RAILS_ENV=production
     
 #### 5. Sisesta andmebaasi schema ja andmed migrtsioonide abil
     
