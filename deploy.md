@@ -1,3 +1,5 @@
+Oma rakenduse laadimine production serverisse
+=============
 
 1. Saada juhendajale oma SSH avalik võti. Tavaliselt on see fail ~/.ssh/id_rsa.pub või ~/.ssh/id_dsa.pub
 
@@ -5,17 +7,15 @@
 
 3. Oma railsi applikatsiooni serveris tööle logi serverisse sisse ja järgi jägmiseid juhiseid
 
-
+---
 
 1. Tõmba alla applikatsiooni lähtekood 
 
-cd apps
+    cd apps
 
-git clone REPO_AADRESS
+    git clone REPO_AADRESS
 
-või
-
-hg clone REPO_AADRESS
+    hg clone REPO_AADRESS
 
 
 
