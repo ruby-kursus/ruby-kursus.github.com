@@ -49,7 +49,7 @@ Kui kasutad Postgresqli:
       username: KASUTAJANIMI # toomas
       password: # selle leiad serverist oma kodukataloogis olevast failist 'postgres_pwd'
 
- või Mysql'i korral:
+ või Mysql'i:
 
     production:
       adapter: mysql
@@ -58,6 +58,14 @@ Kui kasutad Postgresqli:
       pool: 5
       username: KASUTAJANIMI # toomas
       password: # selle leiad serverist oma kodukataloogis olevast failist 'mysql_pwd'
+      
+või Sqlite'i (kõige lihtsam variant):
+
+    production:
+      adapter: sqlite3
+      database: db/production.sqlite3
+      pool: 5
+      timeout: 5000
       
 Postgresql puhul on vaja lisada Gemfile sisse rida "gem 'pg"', mysql puhul "gem 'mysql2'"
 
