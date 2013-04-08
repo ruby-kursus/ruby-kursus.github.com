@@ -77,10 +77,14 @@ Postgresql puhul on vaja lisada Gemfile sisse rida "gem 'pg"', mysql puhul "gem 
     
     bundle exec rake db:migrate RAILS_ENV=production
     
-#### 6. Käivita Ruby veebiserveri protsess
+#### 6. Eelkompileeri CSS ja JS
+    
+    rake assets:precompile
+    
+#### 7. Käivita Ruby veebiserveri protsess
 
     bundle exec thin start -e production -p PORDI_NUMBER
     
-#### 7. Kontrolli, kas rakendus on veebibrauseriga kasutatav
+#### 8. Kontrolli, kas rakendus on veebibrauseriga kasutatav
 
 ava `http://SERVERI_IP_AADRESS:PORDI_NUMBER`
